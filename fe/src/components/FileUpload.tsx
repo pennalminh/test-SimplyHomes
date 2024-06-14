@@ -24,6 +24,7 @@ const FileUpload: React.FC = () => {
   ];
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setVisibleBtn(false);
     if (event.target.files) {
       setFile(event.target.files[0]);
     }
@@ -82,7 +83,10 @@ const FileUpload: React.FC = () => {
   };
 
   const callAPISubmitData = async () => {
-    await submitData(listObjectValid);
+    const response = await submitData(listObjectValid);
+    if (response?.data.success) {
+      alert("Submitted successfully");
+    }
   };
 
   return (
